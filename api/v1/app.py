@@ -5,7 +5,7 @@ Flask App
 from flask import Flask, make_response, jsonify
 from models import storage
 from api.v1.views import app_views, app_views_states, app_views_cities
-from api.v1.views import app_views_amenities
+from api.v1.views import app_views_amenities, app_views_users
 from os import getenv
 
 app = Flask(__name__)
@@ -13,6 +13,7 @@ app.register_blueprint(app_views)
 app.register_blueprint(app_views_states)
 app.register_blueprint(app_views_cities)
 app.register_blueprint(app_views_amenities)
+app.register_blueprint(app_views_users)
 
 
 @app.teardown_appcontext
