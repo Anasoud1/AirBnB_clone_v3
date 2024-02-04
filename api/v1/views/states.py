@@ -7,7 +7,7 @@ from models.state import State
 
 
 @app_views.route('/states', strict_slashes=False,
-                        methods=['GET'])
+                 methods=['GET'])
 def get_states():
     """Retrieves the list of all State objects"""
     list_dict = []
@@ -17,7 +17,7 @@ def get_states():
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
-                        methods=['GET'])
+                 methods=['GET'])
 def get_state_id(state_id):
     """Retrieves a State object"""
     for obj in list(storage.all(State).values()):
@@ -27,7 +27,7 @@ def get_state_id(state_id):
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
-                        methods=['DELETE'])
+                 methods=['DELETE'])
 def delete_state(state_id):
     """Deletes a State object"""
     for obj in list(storage.all(State).values()):
@@ -53,7 +53,7 @@ def post_state_id():
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
-                        methods=['PUT'])
+                 methods=['PUT'])
 def put_state_id(state_id):
     """Updates a State object"""
     obj = 0
