@@ -47,8 +47,8 @@ def post_city_id(state_id):
     """Creates a City"""
     if request.headers['Content-type'] != 'application/json':
         abort(400, 'Not a JSON')
-    for city in list(storage.all(City).values()):
-        if state_id == city.state_id:
+    for state in list(storage.all(State).values()):
+        if state_id == state.id:
             data = request.get_json()
             if 'name' not in data:
                 abort(400, 'Missing name')
