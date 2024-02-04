@@ -9,17 +9,19 @@ from os import getenv
 
 app = Flask(__name__)
 app.register_blueprint(app_views, url_prefix='/api/v1')
-#app.register_blueprint(app_views_states)
+
 
 @app.teardown_appcontext
 def teardown_db(obj):
     """ teardown Method """
     storage.close()
 
+
 @app.errorhandler(404)
 def notfound(e):
     """ handler for 404 errors """
     return make_response(jsonify({"error": "Not found"}), 404)
+
 
 if __name__ == "__main__":
     host = getenv("HBNB_API_HOST", "0.0.0.0")
