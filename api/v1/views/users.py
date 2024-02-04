@@ -27,7 +27,7 @@ def get_user_id(user_id):
 
 
 @app_views_users.route('/users/<user_id>', strict_slashes=False,
-                      methods=['DELETE'])
+                       methods=['DELETE'])
 def delete_user(user_id):
     """Deletes a User object"""
     for obj in list(storage.all(User).values()):
