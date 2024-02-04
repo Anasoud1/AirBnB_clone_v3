@@ -47,13 +47,16 @@ def post_city_id(state_id):
     """Creates a City"""
     if request.headers['Content-type'] != 'application/json':
         abort(400, 'Not a JSON')
-    data = request.get_json()
-    if 'name' not in data:
-        abort(400, 'Missing name')
-    new_city = City(state_id=state_id, name=data['name'])
-    storage.new(new_city)
-    storage.save()
-    return jsonify(new_city.to_dict()), 201
+    for city in list(storage.all(City).values()):
+        if state_id == city.state_id:
+            data = request.get_json()
+            if 'name' not in data:
+                abort(400, 'Missing name')
+            new_city = City(state_id=state_id, name=data['name'])
+            storage.new(new_city)
+            storage.save()
+            return jsonify(new_city.to_dict()), 201
+    abort(404)
 
 
 @app_views_cities.route('/cities/<city_id>', strict_slashes=False,
