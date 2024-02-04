@@ -70,4 +70,4 @@ def put_amenities_id(amenity_id):
         if k not in ['id', 'created_at', 'updated_at']:
             setattr(obj, k, v)
     obj.save()
-    return jsonify(obj.to_dict()), 20
+    return jsonify(obj.to_dict()), 200
