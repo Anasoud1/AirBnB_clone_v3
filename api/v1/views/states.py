@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-from api.v1.views import app_views
+from api.v1.views import app_views_states
 from flask import jsonify, request, abort
 from models import storage
 from models.state import State
 
 
-@app_views.route('/states', strict_slashes=False)
+@app_views_states.route('/states', strict_slashes=False,
+                        methods=['GET'])
 def get_states():
     list_dict = []
     for obj in list(storage.all(State).values()):
@@ -13,8 +14,8 @@ def get_states():
     return jsonify(list_dict)
 
 
-@app_views.route('/states/<state_id>', strict_slashes=False,
-                 methods=['GET'])
+@app_views_states.route('/states/<state_id>', strict_slashes=False,
+                        methods=['GET'])
 def get_state_id(state_id):
     for obj in list(storage.all(State).values()):
         if state_id == obj.id:
@@ -22,8 +23,8 @@ def get_state_id(state_id):
     abort(404)
 
 
-@app_views.route('/states/<state_id>', strict_slashes=False,
-                 methods=['DELETE'])
+@app_views_states.route('/states/<state_id>', strict_slashes=False,
+                        methods=['DELETE'])
 def delete_state(state_id):
     for obj in list(storage.all(State).values()):
         if state_id == obj.id:
@@ -33,7 +34,7 @@ def delete_state(state_id):
     abort(404)
 
 
-@app_views.route('/states', strict_slashes=False, methods=['POST'])
+@app_views_states.route('/states', strict_slashes=False, methods=['POST'])
 def post_state_id():
     if request.headers['Content-type'] != 'application/json':
         abort(400, 'Not a JSON')
@@ -46,7 +47,8 @@ def post_state_id():
     return jsonify(new_state.to_dict()), 201
 
 
-@app_views.route('/states/<state_id>', strict_slashes=False, methods=['PUT'])
+@app_views_states.route('/states/<state_id>', strict_slashes=False,
+                        methods=['PUT'])
 def put_state_id(state_id):
     obj = 0
     for o in list(storage.all(State).values()):
