@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """state api"""
-from api.v1.views import app_views_states
+from api.v1.views import app_views
 from flask import jsonify, request, abort
 from models import storage
 from models.state import State
 
 
-@app_views_states.route('/states', strict_slashes=False,
+@app_views.route('/states', strict_slashes=False,
                         methods=['GET'])
 def get_states():
     """Retrieves the list of all State objects"""
@@ -16,7 +16,7 @@ def get_states():
     return jsonify(list_dict)
 
 
-@app_views_states.route('/states/<state_id>', strict_slashes=False,
+@app_views.route('/states/<state_id>', strict_slashes=False,
                         methods=['GET'])
 def get_state_id(state_id):
     """Retrieves a State object"""
@@ -26,7 +26,7 @@ def get_state_id(state_id):
     abort(404)
 
 
-@app_views_states.route('/states/<state_id>', strict_slashes=False,
+@app_views.route('/states/<state_id>', strict_slashes=False,
                         methods=['DELETE'])
 def delete_state(state_id):
     """Deletes a State object"""
@@ -38,7 +38,7 @@ def delete_state(state_id):
     abort(404)
 
 
-@app_views_states.route('/states', strict_slashes=False, methods=['POST'])
+@app_views.route('/states', strict_slashes=False, methods=['POST'])
 def post_state_id():
     """Creates a State"""
     if request.headers['Content-type'] != 'application/json':
@@ -52,7 +52,7 @@ def post_state_id():
     return jsonify(new_state.to_dict()), 201
 
 
-@app_views_states.route('/states/<state_id>', strict_slashes=False,
+@app_views.route('/states/<state_id>', strict_slashes=False,
                         methods=['PUT'])
 def put_state_id(state_id):
     """Updates a State object"""
