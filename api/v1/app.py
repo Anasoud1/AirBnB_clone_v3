@@ -4,7 +4,7 @@ Flask App
 """
 from flask import Flask, make_response, jsonify
 from models import storage
-from api.v1.views import app_views, app_views_state
+from api.v1.views import app_views, app_views_states
 from os import getenv
 
 app = Flask(__name__)
