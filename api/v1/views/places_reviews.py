@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-RESTFUL API actions for reviews
+view for Reviews object that handles all defaults RESTFUL API actions
 """
 
 from api.v1.views import app_views
@@ -14,7 +14,7 @@ import json
                  strict_slashes=False, methods=["GET"])
 def review_by_place(place_id):
     """
-    Retrieves the list of all Review objects of a Place
+    returns list of places under the give place's id
     Args:
         place_id (str): place's id
     """
@@ -32,7 +32,7 @@ def review_by_place(place_id):
 @app_views.route("/reviews/<review_id>", strict_slashes=False, methods=["GET"])
 def review_by_id(review_id):
     """
-    Retrieves a Review object
+    returns the review object under the given id
     Args:
         review_id (str): id of the city to return_
     """
@@ -46,7 +46,7 @@ def review_by_id(review_id):
                  strict_slashes=False, methods=["DELETE"])
 def get_rid_of_review(review_id):
     """
-    Deletes a Review object
+    delette a review
     Args:
         review_id (str): review id to delete
     """
@@ -62,7 +62,7 @@ def get_rid_of_review(review_id):
                  strict_slashes=False, methods=["POST"])
 def update_review_by_id(place_id):
     """
-    Creates a Review
+    update  an instance of review
     Args:
         review_id (str): review's id
     """
@@ -87,7 +87,7 @@ def update_review_by_id(place_id):
 @app_views.route("/reviews/<review_id>", strict_slashes=False, methods=["PUT"])
 def update_review(review_id):
     """
-    Updates a Review object
+    update the review by given id
     Args:
         review_id (str): review's id to update
     """
